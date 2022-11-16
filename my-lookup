@@ -1,0 +1,23 @@
+#!/bin/bash
+#The Filename Variable
+Filename=${1}
+#The Identifier Variable
+Identifier=${2}
+
+# Checks for two paramters and that it has the .txt file type
+if [[ $# > 2 || $# < 2 || $1 != *".txt" ]]; then 
+	echo "You need to provide two arguements for this script to work."
+	echo "First arguement should be a .txt file and the other a last name"
+	echo "Usage: my-lookup <filename> <name>"
+else
+# if the file exists then print out all rows that have only letters
+# and that matches identifier
+	if [ -f "$Filename" ]; then
+		 grep -P "^[a-zA-Z]+(?: [a-zA-z]+)* ($Identifier)$" $Filename
+		echo " "
+		echo "Goodbye!"
+	else
+	#If no file was found then tell the user
+		echo "$Filename was not found!"
+	fi
+fi
